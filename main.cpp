@@ -2,6 +2,19 @@
 #include<iomanip>
 #include<fstream>
 
+struct card_pos
+{
+    int eixo_x;
+    int eixo_y;
+};
+
+struct boat
+{
+    int head_x;
+    int head_y;
+    char orientation;
+};
+
 class table
 {
 private:
@@ -10,6 +23,11 @@ private:
     int **board;
     bool available = true;
     char content;
+    card_pos shuffle_insert = [dimension_x * dimension_y];
+    boat submarine[4];
+    boat cruiser[3];
+    boat destroyer[2];
+    boat battleship[1];
 
 public:
     char ocean = 'o';
@@ -36,29 +54,37 @@ public:
         dimension_x = rows;
         dimension_y = cols;
     }
-};
 
-struct boat
-{
-    int head_x;
-    int head_y;
-    char orientation;
-};
+    set_shuffle(shuffle_insert[])
+    {
+        for (int i = 0 ; i < dimension_x ; i++)
+        {
+            for(int j = 0 ; j < dimension_y ; j++)
+            {
+                shuffle_insert.eixo_x = i;
+                shuffle_insert.eixo_y = j;
+            }
+        }
 
-set_boat(table active, )
-{
-    boat submarine[4];
-    boat cruiser[3];
-    boat destroyer[2];
-    boat battleship;
-}
+        int total_dimension = dimension_x * dimension_y;     
+        for (int k = 0 ; k < dimension_x * dimension_y; k++);
+        {
+            int position_rand = rand() % total_dimension;
+            card_pos aux;
+            aux = shuffle_insert[k];
+            shuffle_insert[k] = shuffle_insert[position_rand];
+            shuffle_insert[position_rand] = aux;
+
+        }
+    }
+
+    
+};
 
 
 int main()
 {  
     using unsigned int = parameters;
-
-    table active_board[boards];
     
     parameters dimension_max = 16;
     parameters dimension_min = 7; 
@@ -71,13 +97,11 @@ int main()
     std::cout << min_puzzles_bs << std::endl;
     std::cout << max_puzzles_bs << std::endl;
     
-    parameters height;
-    parameters width;
-    parameters puzzles;
-    parameters puzzle_number;
+    parameters height = 10;
+    parameters width = 10;
+    parameters puzzle_number = 0;
 
-
-    create_puzzles(height, width, puzzles);
+    shuffle_insert(height, width)
 
     print_table(puzzle_number);
     
